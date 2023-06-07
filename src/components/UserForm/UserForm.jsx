@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Form(props) {
+function UserForm(props) {
     return (
         <div>
 
@@ -8,4 +8,4 @@ function Form(props) {
     );
 }
 
-export default Form;
+export default UserForm;
