@@ -38,6 +38,7 @@ function Data() {
       ]);
       const [text,setText] = useState('input text');
       const [image, setImage] = useState('input img');
+      const [age, setAge] = useState('input age');
     
       function handleSubmit(event){
         event.preventDefault()
@@ -45,12 +46,14 @@ function Data() {
         const post = {
           image,
           text,
+          age,
           id: Date.now()
         }
     
         setList((prev) => [...prev, post])
         setText('')
         setImage('')
+        setAge('')
       }
   return (
     <>
