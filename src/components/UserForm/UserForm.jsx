@@ -1,5 +1,5 @@
 import React from "react";
-// import { useState } from "react";
+import { useState } from "react";
 
 import {
   Button,
@@ -20,6 +20,29 @@ const { TextArea } = Input;
 // };
 
 function UserForm(props) {
+  const [formData, setFormData] = useState({
+    name: "",
+    age: "",
+    email: "",
+    phone: "",
+    checkbox: false,
+    radio: "",
+    textarea: "",
+  });
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    // обработка данных формы
+  }
+
+  function handleChange(event) {
+    const { name, value, type, checked } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  }
+
   return (
     <div className="wrapper">
       <h1>Анкета для опекуна</h1>
@@ -27,6 +50,7 @@ function UserForm(props) {
         labelCol={{
           span: 10,
         }}
+        labelWrap
         wrapperCol={{
           span: 14,
         }}
@@ -34,49 +58,146 @@ function UserForm(props) {
         style={{
           maxWidth: 600,
         }}
+        onSubmit={handleSubmit}
       >
         <Form.Item label="ФИО">
-          <Input placeholder="Ваши фамилия и имя" />
+          <Input
+            placeholder="Ваши фамилия и имя"
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
         </Form.Item>
         <Form.Item label="Возраст">
-          <InputNumber />
+          <InputNumber
+            name="age"
+            value={formData.age}
+            onChange={handleChange}
+          />
         </Form.Item>
         <Form.Item label="Email">
-          <Input placeholder="Ваш email" />
+          <Input
+            placeholder="Ваш email"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
         </Form.Item>
         <Form.Item label="Телефон">
-          <Input placeholder="Ваш номер телефона" />
+          <Input
+            placeholder="Ваш номер телефона"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+          />
         </Form.Item>
         <Form.Item label="Были ли у Вас раньше домашние животные?">
-          <br />
           <Radio.Group>
-            <Radio value="yes">Да</Radio>
-            <Radio value="no">Нет</Radio>
+            <Radio
+              type="radio"
+              name="radio"
+              value="yes"
+              checked={formData.radio === "yes"}
+              onChange={handleChange}
+            >
+              Да
+            </Radio>
+            <Radio
+              type="radio"
+              name="radio"
+              value="no"
+              checked={formData.radio === "no"}
+              onChange={handleChange}
+            >
+              Нет
+            </Radio>
           </Radio.Group>
         </Form.Item>
-        <p>Готов ли Ваш дом к приёму питомца?</p>
-        <Form.Item label="Чеклист:" valuePropName="checked">
-          <Checkbox>На окна установлены сетки-"антикошки"</Checkbox>
-          <Checkbox>Есть переноска для транспортировки</Checkbox>
-          <Checkbox>Закуплен корм и миски</Checkbox>
-          <Checkbox>Установлены когтеточки</Checkbox>
-          <Checkbox>Оборудован лоток с наполнителем</Checkbox>
-          <Checkbox>Обустроено спальное место</Checkbox>
+        <Form.Item
+          label="Готов ли Ваш дом к приёму питомца?"
+          valuePropName="checked"
+        >
+          <Checkbox
+            type="checkbox"
+            name="checkbox"
+            checked={formData.checkbox}
+            onChange={handleChange}
+          >
+            На окна установлены сетки-"антикошки"
+          </Checkbox>
+          <Checkbox
+            type="checkbox"
+            name="checkbox"
+            checked={formData.checkbox}
+            onChange={handleChange}
+          >
+            Есть переноска для транспортировки
+          </Checkbox>
+          <Checkbox
+            type="checkbox"
+            name="checkbox"
+            checked={formData.checkbox}
+            onChange={handleChange}
+          >
+            Закуплен корм и миски
+          </Checkbox>
+          <Checkbox
+            type="checkbox"
+            name="checkbox"
+            checked={formData.checkbox}
+            onChange={handleChange}
+          >
+            Установлены когтеточки
+          </Checkbox>
+          <Checkbox
+            type="checkbox"
+            name="checkbox"
+            checked={formData.checkbox}
+            onChange={handleChange}
+          >
+            Оборудован лоток с наполнителем
+          </Checkbox>
+          <Checkbox
+            type="checkbox"
+            name="checkbox"
+            checked={formData.checkbox}
+            onChange={handleChange}
+          >
+            Обустроено спальное место
+          </Checkbox>
         </Form.Item>
-        <Form.Item label="Корм">
+        <Form.Item label="Как вы планируете кормить питомца?">
           <Select>
-            <Select.Option value="dry">Сухой</Select.Option>
-            <Select.Option value="moist">Консервы/паучи</Select.Option>
-            <Select.Option value="natural">Натуральный</Select.Option>
-            <Select.Option value="mix">Смешаный</Select.Option>
+            <Select.Option value="dry" onChange={handleChange}>
+              Сухой
+            </Select.Option>
+            <Select.Option value="moist" onChange={handleChange}>
+              Консервы/паучи
+            </Select.Option>
+            <Select.Option value="natural" onChange={handleChange}>
+              Натуральный
+            </Select.Option>
+            <Select.Option value="mix" onChange={handleChange}>
+              Смешаный
+            </Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item label="TextArea">
-          <TextArea rows={4} />
+        <Form.Item label="Здесь Вы можете написать любую дополнительную информацию, которую сочтёте нужной">
+          <TextArea
+            rows={4}
+            name="textarea"
+            value={formData.textarea}
+            onChange={handleChange}
+          />
         </Form.Item>
-        <Form.Item label="Button">
+        <Form.Item label="Отправить">
           <Button type="primary" htmlType="submit">
-            Submit
+            <img
+              src="https://img.icons8.com/?size=1x&id=103459&format=png"
+              alt="cat paw"
+            />
           </Button>
         </Form.Item>
       </Form>
