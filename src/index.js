@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import Main from './components/Main/Main'
 import { globalContext as GlobalContext } from "./components/contexts/globalContext";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 
 function General() {
