@@ -1,10 +1,12 @@
-import UserForm from "./components/UserForm/UserForm";
+import Main from "./components/Main/Main";
+// import UserForm from "./components/UserForm/UserForm";
 
 function App() {
   return (
     <div className="App">
       meow
-      <UserForm />
+      <Main />
+      {/* <UserForm /> */}
     </div>
   );
 }
