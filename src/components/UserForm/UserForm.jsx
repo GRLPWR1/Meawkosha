@@ -12,12 +12,6 @@ import {
 } from "antd";
 
 const { TextArea } = Input;
-// const normFile = (e) => {
-//   if (Array.isArray(e)) {
-//     return e;
-//   }
-//   return e?.fileList;
-// };
 
 function UserForm(props) {
   const [formData, setFormData] = useState({
@@ -32,7 +26,13 @@ function UserForm(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // обработка данных формы
+    fetch("/api/form-data", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => console.log(response))
+      .catch((error) => console.error(error));
   }
 
   function handleChange(event) {
